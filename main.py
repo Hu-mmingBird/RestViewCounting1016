@@ -2,7 +2,6 @@
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 import os
-import sys
 import network
 key_col = input()
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -15,7 +14,7 @@ scope = [
 credentials = ServiceAccountCredentials.from_json_keyfile_name(
     JSON_PATH, scope)
 gc = gspread.authorize(credentials)
-gc1 = gc.open('에프터마케팅18.10~의 사본').worksheet('2019년 월보장')
+gc1 = gc.open('에프터마케팅18.10~의 사본').worksheet('2019년 월보장') #원본 연결 필요
 cntsch = gc1.col_values(1)
 keyword = gc1.col_values(3)
 company = gc1.col_values(5)
@@ -40,6 +39,5 @@ for cs, k, c in zip(cntsch,keyword,company):
 start_col=key_col+'3'
 end_col=key_col+str(len(info['date']))
 date=info['date'][2:]
-print(date)
 date = list(map(list,date))
 gc1.update(start_col+':'+end_col,date)

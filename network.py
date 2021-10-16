@@ -13,6 +13,8 @@ def delete_iframe(url):
     res = requests.get(url, headers=headers)
     res.raise_for_status()
     souptmp = BeautifulSoup(res.text, "html.parser")
+    # print(souptmp)
+    # print(souptmp.iframe)
     src_url = "https://blog.naver.com/" + souptmp.iframe["src"]
     return src_url
 
@@ -34,13 +36,24 @@ def text_scraping(url):
     else:
         return "확인불가"
 
-
 def cafe_crawler2(url, name):
     driver = webdriver.PhantomJS(
-        "C:\\Users\\김훈기\\OneDrive - konkuk.ac.kr\\바탕 화면\\phantomjs-2.1.1-windows\\bin\\phantomjs"
+        "" # phantomjs경로
     )
     driver.get(url)
     driver.switch_to_frame('cafe_main')
+    page_source = driver.page_source
+    if page_source.count(name) > 0:
+        return True
+    else:
+        return False
+def blog_crawler(url,name):
+    driver = webdriver.PhantomJS(
+        "" # phantomjs경로
+    )
+    driver.get(url)
+    element = driver.find_element_by_id("mainFrame")
+    driver.switch_to_frame(element)
     page_source = driver.page_source
     if page_source.count(name) > 0:
         return True
@@ -55,6 +68,7 @@ def counting(name, key):
         parse.quote(search))
     html = urllib.request.urlopen(url, context=context).read()
     soup = BeautifulSoup(html, "html.parser")
+    #
     title = soup.find_all(class_="api_txt_lines total_tit _cross_trigger")
     cnt = 0
     flag = False
@@ -70,6 +84,11 @@ def counting(name, key):
             print('blog')
             durl = delete_iframe(urltmp)
             contents = text_scraping(durl)
+            # print(contents)
+            if contents == "확인불가":
+                flag = blog_crawler(urltmp,name)
+                # print(flag)
+                continue
             if contents.find(name) > 0:
                 flag = True
                 print(contents.find(name))
