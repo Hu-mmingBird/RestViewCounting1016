@@ -4,7 +4,6 @@ import gspread
 import os
 import sys
 import network
-
 key_col = input()
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = THIS_FOLDER + '/automationproj-327806-6e9bf5c39245.json'
@@ -21,7 +20,6 @@ cntsch = gc1.col_values(1)
 keyword = gc1.col_values(3)
 company = gc1.col_values(5)
 info = {'cntsch':[],'keyword': [], 'company': [], 'date': []}
-
 for cs, k, c in zip(cntsch,keyword,company):
     if k == 'END' and c == 'END':
         break
@@ -36,11 +34,12 @@ for cs, k, c in zip(cntsch,keyword,company):
             info['date'].append('')
         else:
             info['date'].append('1')
-            info['date'].append(num)
+            info['date'].append(str(num))
     elif cs=='':
         info['date'].append('')
-
 start_col=key_col+'3'
 end_col=key_col+str(len(info['date']))
 date=info['date'][2:]
+print(date)
+date = list(map(list,date))
 gc1.update(start_col+':'+end_col,date)
