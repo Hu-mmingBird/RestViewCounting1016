@@ -1,4 +1,4 @@
-# Restaraunt_Ranking_Counting_Program
+# Restaurant_Ranking_Counting_Program
 ## Restaurant Naver View Page Counting Program
 1. Explanation
   - Counting chart rangking from Naver View Page with keyword
