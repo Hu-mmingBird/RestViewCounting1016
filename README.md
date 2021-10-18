@@ -10,6 +10,10 @@
   - User Input: spread sheets Column Name
     - today column name: ex)AML
     -  ![image](https://user-images.githubusercontent.com/43868499/137670221-15cb0a56-7610-4fe7-91ba-21819c1c3f22.png)
+  - Naver View Page
+    - keyword:구워삶기, in chart range(1~6) :1, chart ranking: 1 
+    - ![image](https://user-images.githubusercontent.com/43868499/137670530-b2d29541-fcff-474a-8fc5-b29a11a2fb83.png)
+    
 
 ## Requiremnets
 1. PhantomJS download
