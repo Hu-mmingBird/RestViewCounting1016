@@ -32,12 +32,14 @@ for cs, k, c in zip(cntsch,keyword,company):
             info['date'].append('x')
             info['date'].append('')
         else:
-            info['date'].append('1')
-            info['date'].append(str(num))
+            info['date'].append(1)
+            info['date'].append(num)
     elif cs=='':
         info['date'].append('')
 start_col=key_col+'3'
 end_col=key_col+str(len(info['date']))
 date=info['date'][2:]
-date = list(map(list,date))
-gc1.update(start_col+':'+end_col,date)
+res_col=[]
+for i in date:
+    res_col.append([i])
+gc1.update(start_col+':'+end_col,res_col)
